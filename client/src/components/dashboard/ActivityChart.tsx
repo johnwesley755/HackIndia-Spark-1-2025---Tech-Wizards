@@ -6,37 +6,68 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  ResponsiveContainer
+  ResponsiveContainer,
+  Area,
+  AreaChart
 } from "recharts";
-
-const data = [
-  { date: "Mon", conversations: 65 },
-  { date: "Tue", conversations: 59 },
-  { date: "Wed", conversations: 80 },
-  { date: "Thu", conversations: 81 },
-  { date: "Fri", conversations: 56 },
-  { date: "Sat", conversations: 40 },
-  { date: "Sun", conversations: 45 }
-];
+import { generateWeeklyActivity } from "@/lib/mock-data";
+import { useState, useEffect } from "react";
 
 export default function ActivityChart() {
+  const [data, setData] = useState(generateWeeklyActivity());
+
+  // Update data every minute to simulate real-time updates
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setData(generateWeeklyActivity());
+    }, 60000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <Card className="p-6">
-      <h3 className="font-semibold mb-6">Weekly Activity</h3>
+      <div className="flex items-center justify-between mb-6">
+        <h3 className="font-semibold">Weekly Activity</h3>
+        <div className="text-sm text-muted-foreground">
+          Last 7 days
+        </div>
+      </div>
       <div className="h-[300px]">
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={data}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="date" />
-            <YAxis />
-            <Tooltip />
-            <Line 
-              type="monotone" 
-              dataKey="conversations" 
-              stroke="hsl(var(--primary))" 
+          <AreaChart data={data}>
+            <defs>
+              <linearGradient id="colorConversations" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="hsl(var(--primary))" stopOpacity={0.1}/>
+                <stop offset="95%" stopColor="hsl(var(--primary))" stopOpacity={0}/>
+              </linearGradient>
+            </defs>
+            <CartesianGrid strokeDasharray="3 3" opacity={0.1} />
+            <XAxis 
+              dataKey="date" 
+              stroke="hsl(var(--muted-foreground))"
+              fontSize={12}
+            />
+            <YAxis 
+              stroke="hsl(var(--muted-foreground))"
+              fontSize={12}
+            />
+            <Tooltip 
+              contentStyle={{
+                backgroundColor: "hsl(var(--background))",
+                border: "1px solid hsl(var(--border))",
+                borderRadius: "var(--radius)",
+              }}
+            />
+            <Area
+              type="monotone"
+              dataKey="conversations"
+              stroke="hsl(var(--primary))"
+              fillOpacity={1}
+              fill="url(#colorConversations)"
               strokeWidth={2}
             />
-          </LineChart>
+          </AreaChart>
         </ResponsiveContainer>
       </div>
     </Card>
