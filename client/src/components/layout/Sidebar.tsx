@@ -8,6 +8,10 @@ import {
   Puzzle 
 } from "lucide-react";
 
+interface SidebarProps {
+  onClose?: () => void;
+}
+
 const navigation = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
   { name: "Chat", href: "/chat", icon: MessageSquare },
@@ -16,8 +20,14 @@ const navigation = [
   { name: "Settings", href: "/settings", icon: Settings },
 ];
 
-export default function Sidebar() {
+export default function Sidebar({ onClose }: SidebarProps) {
   const [location] = useLocation();
+
+  const handleNavigation = () => {
+    if (onClose) {
+      onClose();
+    }
+  };
 
   return (
     <div className="fixed inset-y-0 left-0 w-64 bg-card border-r">
@@ -33,12 +43,15 @@ export default function Sidebar() {
 
           return (
             <Link key={item.name} href={item.href}>
-              <a className={cn(
-                "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
-                isActive 
-                  ? "bg-primary/10 text-primary" 
-                  : "hover:bg-muted"
-              )}>
+              <a 
+                className={cn(
+                  "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+                  isActive 
+                    ? "bg-primary/10 text-primary" 
+                    : "hover:bg-muted"
+                )}
+                onClick={handleNavigation}
+              >
                 <Icon className="h-4 w-4" />
                 {item.name}
               </a>
