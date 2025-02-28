@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 
 const navigation = [
-  { name: "Dashboard", href: "/", icon: LayoutDashboard },
+  { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
   { name: "Chat", href: "/chat", icon: MessageSquare },
   { name: "Team", href: "/team", icon: Users },
   { name: "Integrations", href: "/integrations", icon: Puzzle },
@@ -25,12 +25,12 @@ export default function Sidebar() {
         <div className="h-8 w-8 rounded-lg bg-primary" />
         <span className="font-semibold">AI Support</span>
       </div>
-      
+
       <nav className="flex flex-col gap-1 p-4">
         {navigation.map((item) => {
           const isActive = location === item.href;
           const Icon = item.icon;
-          
+
           return (
             <Link key={item.name} href={item.href}>
               <a className={cn(

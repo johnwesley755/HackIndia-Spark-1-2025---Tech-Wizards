@@ -22,19 +22,12 @@ export default function Landing() {
             <span className="font-semibold text-lg">AI Support</span>
           </div>
           <div className="flex items-center gap-4">
-            <Link href="/login">
-              <a className="text-sm font-medium hover:text-primary">
-                Login
-              </a>
-            </Link>
-            <Link href="/dashboard">
-              <a>
-                <Button>
-                  Get Started
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </a>
-            </Link>
+            <Button variant="ghost" asChild>
+              <Link href="/dashboard">Sign In</Link>
+            </Button>
+            <Button asChild>
+              <Link href="/dashboard">Get Started</Link>
+            </Button>
           </div>
         </div>
       </nav>
@@ -55,14 +48,9 @@ export default function Landing() {
               Transform your customer support with intelligent AI agents that understand, respond, and learn from every interaction.
             </p>
             <div className="flex items-center justify-center gap-4">
-              <Link href="/dashboard">
-                <a>
-                  <Button size="lg" className="gap-2">
-                    Start Free Trial
-                    <ArrowRight className="h-4 w-4" />
-                  </Button>
-                </a>
-              </Link>
+              <Button size="lg" className="gap-2" asChild>
+                <Link href="/dashboard">Start Free Trial</Link>
+              </Button>
               <Button size="lg" variant="outline">
                 Watch Demo
               </Button>
@@ -112,14 +100,9 @@ export default function Landing() {
             <p className="text-muted-foreground mb-8">
               Join thousands of businesses already using our AI platform to deliver exceptional customer experiences.
             </p>
-            <Link href="/dashboard">
-              <a>
-                <Button size="lg" className="gap-2">
-                  Get Started Now
-                  <ArrowRight className="h-4 w-4" />
-                </Button>
-              </a>
-            </Link>
+            <Button size="lg" className="gap-2" asChild>
+              <Link href="/dashboard">Get Started Now</Link>
+            </Button>
           </motion.div>
         </div>
       </section>
