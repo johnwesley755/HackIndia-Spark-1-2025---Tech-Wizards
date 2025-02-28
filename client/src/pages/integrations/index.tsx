@@ -7,14 +7,16 @@ import {
   SiGmail, 
   SiSlack, 
   SiHubspot, 
-  SiStripe 
+  SiStripe,
+  SiZoom 
 } from "react-icons/si";
 
 const integrationIcons = {
   gmail: SiGmail,
   slack: SiSlack,
   hubspot: SiHubspot,
-  stripe: SiStripe
+  stripe: SiStripe,
+  zoom: SiZoom
 };
 
 export default function Integrations() {
@@ -35,7 +37,7 @@ export default function Integrations() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {integrations.map((integration) => {
           const Icon = integrationIcons[integration.id as keyof typeof integrationIcons];
-          
+
           return (
             <Card key={integration.id} className="p-6">
               <div className="flex items-start justify-between gap-4">
@@ -43,7 +45,7 @@ export default function Integrations() {
                   <div className="p-2 rounded-lg bg-primary/10">
                     <Icon className="h-6 w-6 text-primary" />
                   </div>
-                  
+
                   <div>
                     <div className="flex items-center gap-2">
                       <h3 className="font-semibold">
