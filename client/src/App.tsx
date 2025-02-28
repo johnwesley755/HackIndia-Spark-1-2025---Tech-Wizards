@@ -4,6 +4,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import NotFound from "@/pages/not-found";
 import DashboardLayout from "@/components/layout/DashboardLayout";
+import Landing from "@/pages/landing";
 import Dashboard from "@/pages/dashboard";
 import Chat from "@/pages/chat";
 import Settings from "@/pages/settings";
@@ -13,11 +14,47 @@ import Integrations from "@/pages/integrations";
 function Router() {
   return (
     <Switch>
-      <Route path="/" component={Dashboard} />
-      <Route path="/chat" component={Chat} />
-      <Route path="/settings" component={Settings} />
-      <Route path="/team" component={Team} />
-      <Route path="/integrations" component={Integrations} />
+      {/* Public routes */}
+      <Route path="/" component={Landing} />
+
+      {/* Dashboard routes - wrapped in DashboardLayout */}
+      <Route path="/dashboard">
+        {() => (
+          <DashboardLayout>
+            <Dashboard />
+          </DashboardLayout>
+        )}
+      </Route>
+      <Route path="/chat">
+        {() => (
+          <DashboardLayout>
+            <Chat />
+          </DashboardLayout>
+        )}
+      </Route>
+      <Route path="/settings">
+        {() => (
+          <DashboardLayout>
+            <Settings />
+          </DashboardLayout>
+        )}
+      </Route>
+      <Route path="/team">
+        {() => (
+          <DashboardLayout>
+            <Team />
+          </DashboardLayout>
+        )}
+      </Route>
+      <Route path="/integrations">
+        {() => (
+          <DashboardLayout>
+            <Integrations />
+          </DashboardLayout>
+        )}
+      </Route>
+
+      {/* Fallback to 404 */}
       <Route component={NotFound} />
     </Switch>
   );
@@ -26,9 +63,7 @@ function Router() {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <DashboardLayout>
-        <Router />
-      </DashboardLayout>
+      <Router />
       <Toaster />
     </QueryClientProvider>
   );
