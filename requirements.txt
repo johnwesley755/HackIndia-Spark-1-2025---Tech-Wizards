@@ -1,0 +1,7 @@
+faiss-cpu
+sentence-transformers
+python-docx
+fastapi
+uvicorn
+transformers
+torch
