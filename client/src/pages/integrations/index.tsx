@@ -3,12 +3,13 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { integrations } from "@/lib/mock-data";
-import { 
-  SiGmail, 
-  SiSlack, 
-  SiHubspot, 
+import {
+  SiGmail,
+  SiSlack,
+  SiHubspot,
   SiStripe,
-  SiZoom 
+  SiZoom,
+  SiZendesk,
 } from "react-icons/si";
 
 const integrationIcons = {
@@ -16,7 +17,8 @@ const integrationIcons = {
   slack: SiSlack,
   hubspot: SiHubspot,
   stripe: SiStripe,
-  zoom: SiZoom
+  zoom: SiZoom,
+  zendesk: SiZendesk, // ✅ Added missing Zendesk icon
 };
 
 export default function Integrations() {
@@ -36,7 +38,9 @@ export default function Integrations() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {integrations.map((integration) => {
-          const Icon = integrationIcons[integration.id as keyof typeof integrationIcons];
+          const Icon =
+            integrationIcons[integration.id as keyof typeof integrationIcons] ||
+            SiSlack; // ✅ Fallback icon
 
           return (
             <Card key={integration.id} className="p-6">
@@ -48,13 +52,9 @@ export default function Integrations() {
 
                   <div>
                     <div className="flex items-center gap-2">
-                      <h3 className="font-semibold">
-                        {integration.name}
-                      </h3>
+                      <h3 className="font-semibold">{integration.name}</h3>
                       {integration.connected && (
-                        <Badge variant="secondary">
-                          Connected
-                        </Badge>
+                        <Badge variant="secondary">Connected</Badge>
                       )}
                     </div>
                     <p className="text-sm text-muted-foreground mt-1">
@@ -63,7 +63,9 @@ export default function Integrations() {
                   </div>
                 </div>
 
-                <Button variant={integration.connected ? "destructive" : "default"}>
+                <Button
+                  variant={integration.connected ? "destructive" : "default"}
+                >
                   {integration.connected ? "Disconnect" : "Connect"}
                 </Button>
               </div>

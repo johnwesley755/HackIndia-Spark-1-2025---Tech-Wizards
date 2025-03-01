@@ -1,6 +1,9 @@
 import { motion } from "framer-motion";
 import StatCards from "@/components/dashboard/StatCards";
 import ActivityChart from "@/components/dashboard/ActivityChart";
+import TopPerformingAgents from "@/components/dashboard/TopPerformingAgents";
+import SystemHealth from "@/components/dashboard/SystemHealth";
+import DashboardTrends from "@/components/dashboard/DashboardTrends";
 
 export default function Dashboard() {
   return (
@@ -19,6 +22,9 @@ export default function Dashboard() {
 
       <StatCards />
       <ActivityChart />
+      <TopPerformingAgents />
+      <SystemHealth />
+      <DashboardTrends />
     </motion.div>
   );
 }

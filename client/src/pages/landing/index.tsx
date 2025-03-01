@@ -18,7 +18,7 @@ export default function Landing() {
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="h-8 w-8 rounded-lg bg-primary" />
-            <span className="font-semibold text-lg">AI Support</span>
+            <span className="font-semibold text-lg">Lemma AI</span>
           </div>
           <div className="flex items-center gap-2 sm:gap-4">
             <Button variant="ghost" asChild className="hidden sm:inline-flex">
